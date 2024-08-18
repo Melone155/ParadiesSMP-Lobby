@@ -1,0 +1,4 @@
+name: ParadiesSMP-Lobby
+version: '1.0-SNAPSHOT'
+main: de.melone.Lobby.Lobby.Main
+api-version: '1.21'
