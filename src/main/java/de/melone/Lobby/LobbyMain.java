@@ -121,9 +121,15 @@ public class LobbyMain extends JavaPlugin {
         messageyml.set("Message.Scorbord.Titel", "DeinServer");
         messageyml.set("Message.Scorbord.Player", "Spieler:");
         messageyml.set("Message.Scorbord.Player2", "%player%");
+        messageyml.set("Message.Scorbord.Online", "Online:");
+        messageyml.set("Message.Scorbord.Onlin2", "%onlineplayer%/%maxonlineplayer%");
         messageyml.set("Message.Scorbord.Rang", "Rang:");
         messageyml.set("Message.Scorbord.Playtime", "Spielzeit");
         messageyml.set("Message.Scorbord.Playtime2", "%playtime%");
+        messageyml.set("Message.Scorbord.tiktok", "Tiktok2");
+        messageyml.set("Message.Scorbord.toktok2", "ParadiesSMPDE");
+        messageyml.set("Message.Scorbord.Webseite", "Webseite");
+        messageyml.set("Message.Scorbord.Webseite2", "Coming Soon!");
 
         try {
             messageyml.save(messagefile);
