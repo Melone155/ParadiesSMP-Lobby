@@ -6,13 +6,20 @@ import de.melone.Lobby.CMD.CMD_setwarp;
 import de.melone.Lobby.Listener.Buildevent;
 import de.melone.Lobby.Listener.Join;
 import de.melone.Lobby.Listener.Navigator;
+import de.melone.Lobby.Listener.Scorbord;
+import fr.mrmicky.fastboard.FastBoard;
+import it.unimi.dsi.fastutil.ints.AbstractInt2BooleanMap;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class LobbyMain extends JavaPlugin {
 
@@ -28,6 +35,8 @@ public class LobbyMain extends JavaPlugin {
     public static String noperms = messageyml.getString("Message.noperms");
     public static String error = messageyml.getString("Message.error");
     public static String soon = messageyml.getString("Message.soon");
+
+    public static Player player;
 
     @Override
     public void onEnable() {
@@ -108,6 +117,13 @@ public class LobbyMain extends JavaPlugin {
         messageyml.set("Message.build.on", "Du kannst bauen");
         messageyml.set("Message.build.seton", "Der Spieler %targetplayer% kann jetzt bauen");
         messageyml.set("Message.build.setoff", "Der Spieler %targetplayer% kann nicht mehr bauen");
+
+        messageyml.set("Message.Scorbord.Titel", "DeinServer");
+        messageyml.set("Message.Scorbord.Player", "Spieler:");
+        messageyml.set("Message.Scorbord.Player2", "%player%");
+        messageyml.set("Message.Scorbord.Rang", "Rang:");
+        messageyml.set("Message.Scorbord.Playtime", "Spielzeit");
+        messageyml.set("Message.Scorbord.Playtime2", "%playtime%");
 
         try {
             messageyml.save(messagefile);
