@@ -35,7 +35,7 @@ public class Navigator implements Listener {
 
                     Inventory inv = Bukkit.createInventory(null, 54, "");
 
-                    ItemStack leer = new ItemStack(Material.WHITE_STAINED_GLASS);
+                    ItemStack leer = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
                     ItemMeta leermeta = leer.getItemMeta();
                     leermeta.setDisplayName(" ");
                     leer.setItemMeta(leermeta);
@@ -46,62 +46,62 @@ public class Navigator implements Listener {
 
                     ItemStack spawn = new ItemStack(Material.HONEYCOMB);
                     ItemMeta spawnmeta = spawn.getItemMeta();
-                    spawnmeta.setDisplayName(ColorMessage(LobbyMain.messageyml.getString("Message.item.Navigator.spawn")));
+                    spawnmeta.setDisplayName(LobbyMain.messageyml.getString("Message.item.Navigator.spawn"));
                     spawn.setItemMeta(spawnmeta);
 
                     ItemStack build = new ItemStack(Material.GOLDEN_PICKAXE);
                     ItemMeta buildmeta = build.getItemMeta();
-                    buildmeta.setDisplayName(ColorMessage(LobbyMain.messageyml.getString("Message.item.Navigator.build")));
+                    buildmeta.setDisplayName(LobbyMain.messageyml.getString("Message.item.Navigator.build"));
                     build.setItemMeta(buildmeta);
 
                     ItemStack creative = new ItemStack(Material.DIAMOND_PICKAXE);
                     ItemMeta creativemeta = creative.getItemMeta();
-                    creativemeta.setDisplayName(ColorMessage(LobbyMain.messageyml.getString("Message.item.Navigator.creative")));
+                    creativemeta.setDisplayName(LobbyMain.messageyml.getString("Message.item.Navigator.creative"));
                     creative.setItemMeta(creativemeta);
 
                     ItemStack dev = new ItemStack(Material.LAVA_BUCKET);
                     ItemMeta devmeta = dev.getItemMeta();
-                    devmeta.setDisplayName(ColorMessage(LobbyMain.messageyml.getString("Message.item.Navigator.dev")));
+                    devmeta.setDisplayName(LobbyMain.messageyml.getString("Message.item.Navigator.dev"));
                     dev.setItemMeta(devmeta);
 
                     ItemStack privateserver = new ItemStack(Material.AMETHYST_SHARD);
                     ItemMeta privatemeta = privateserver.getItemMeta();
-                    privatemeta.setDisplayName(ColorMessage(LobbyMain.messageyml.getString("Message.item.Navigator.private")));
+                    privatemeta.setDisplayName(LobbyMain.messageyml.getString("Message.item.Navigator.private"));
                     privateserver.setItemMeta(privatemeta);
 
                     ItemStack gestrandet = new ItemStack(Material.JUNGLE_SAPLING);
                     ItemMeta gestrandetmeta = gestrandet.getItemMeta();
-                    gestrandetmeta.setDisplayName(ColorMessage(LobbyMain.messageyml.getString("Message.item.Navigator.gestrandet")));
+                    gestrandetmeta.setDisplayName(LobbyMain.messageyml.getString("Message.item.Navigator.gestrandet"));
                     gestrandet.setItemMeta(gestrandetmeta);
 
                     ItemStack show = new ItemStack(Material.SLIME_BALL);
                     ItemMeta showmeta = show.getItemMeta();
-                    showmeta.setDisplayName(ColorMessage(LobbyMain.messageyml.getString("Message.item.Navigator.showcase")));
+                    showmeta.setDisplayName(LobbyMain.messageyml.getString("Message.item.Navigator.showcase"));
                     show.setItemMeta(showmeta);
 
                     ItemStack smp = new ItemStack(Material.TURTLE_SCUTE);
                     ItemMeta smpmeta = smp.getItemMeta();
-                    smpmeta.setDisplayName(ColorMessage(LobbyMain.messageyml.getString("Message.item.Navigator.smp")));
+                    smpmeta.setDisplayName(LobbyMain.messageyml.getString("Message.item.Navigator.smp"));
                     smp.setItemMeta(smpmeta);
 
                     ItemStack citybuild = new ItemStack(Material.EMERALD);
                     ItemMeta citybuildmeta = citybuild.getItemMeta();
-                    citybuildmeta.setDisplayName(ColorMessage(LobbyMain.messageyml.getString("Message.item.Navigator.citybuild")));
+                    citybuildmeta.setDisplayName(LobbyMain.messageyml.getString("Message.item.Navigator.citybuild"));
                     citybuild.setItemMeta(citybuildmeta);
 
                     ItemStack Paradies = new ItemStack(Material.SPIRE_ARMOR_TRIM_SMITHING_TEMPLATE);
                     ItemMeta Paradiesmeta = Paradies.getItemMeta();
-                    Paradiesmeta.setDisplayName(ColorMessage(LobbyMain.messageyml.getString("Message.item.Navigator.paradies")));
+                    Paradiesmeta.setDisplayName(LobbyMain.messageyml.getString("Message.item.Navigator.paradies"));
                     Paradies.setItemMeta(Paradiesmeta);
 
                     ItemStack caseopening = new ItemStack(Material.FIRE_CHARGE);
                     ItemMeta caseopeningmeta = caseopening.getItemMeta();
-                    caseopeningmeta.setDisplayName(ColorMessage(LobbyMain.messageyml.getString("Message.item.Navigator.caseopening")));
+                    caseopeningmeta.setDisplayName(LobbyMain.messageyml.getString("Message.item.Navigator.caseopening"));
                     caseopening.setItemMeta(caseopeningmeta);
 
                     ItemStack soon = new ItemStack(Material.BARRIER);
                     ItemMeta soonmeta = soon.getItemMeta();
-                    soonmeta.setDisplayName(ColorMessage(LobbyMain.messageyml.getString("Message.item.Navigator.soon")));
+                    soonmeta.setDisplayName(LobbyMain.messageyml.getString("Message.item.Navigator.soon"));
                     soon.setItemMeta(soonmeta);
 
                     inv.setItem(4, spawn);
@@ -222,10 +222,5 @@ public class Navigator implements Listener {
                 player.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + LobbyMain.soon));
             }
         }
-    }
-
-    private static String ColorMessage(String message){
-       String convertmessage = String.valueOf(MiniMessage.miniMessage().deserialize(message));
-       return convertmessage;
     }
 }

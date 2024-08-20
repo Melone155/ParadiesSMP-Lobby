@@ -1,5 +1,9 @@
 package de.melone.Lobby;
 
+import de.melone.Lobby.CMD.CMD_build;
+import de.melone.Lobby.CMD.CMD_setspawn;
+import de.melone.Lobby.CMD.CMD_setwarp;
+import de.melone.Lobby.Listener.Join;
 import de.melone.Lobby.Listener.Navigator;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.EventHandler;
@@ -26,7 +30,9 @@ public class LobbyMain extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
+        registerlistener();
+        registerCommand();
+        CreateConfig();
     }
 
     @Override
@@ -34,10 +40,17 @@ public class LobbyMain extends JavaPlugin {
 
     }
 
+    private void registerCommand(){
+        getCommand("setwarp").setExecutor(new CMD_setwarp());
+        getCommand("setspawn").setExecutor(new CMD_setspawn());
+        getCommand("build").setExecutor(new CMD_build());
+    }
+
     private void registerlistener() {
         final PluginManager pluginManager = super.getServer().getPluginManager();
 
         pluginManager.registerEvents(new Navigator(this), this);
+        pluginManager.registerEvents(new Join(), this);
     }
 
     private void CreateConfig(){
