@@ -3,6 +3,7 @@ package de.melone.Lobby;
 import de.melone.Lobby.CMD.CMD_build;
 import de.melone.Lobby.CMD.CMD_setspawn;
 import de.melone.Lobby.CMD.CMD_setwarp;
+import de.melone.Lobby.Listener.Buildevent;
 import de.melone.Lobby.Listener.Join;
 import de.melone.Lobby.Listener.Navigator;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -30,9 +31,12 @@ public class LobbyMain extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        registerlistener();
-        registerCommand();
+
         CreateConfig();
+        registerCommand();
+        registerlistener();
+
+        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     }
 
     @Override
@@ -51,6 +55,7 @@ public class LobbyMain extends JavaPlugin {
 
         pluginManager.registerEvents(new Navigator(this), this);
         pluginManager.registerEvents(new Join(), this);
+        pluginManager.registerEvents(new Buildevent(), this);
     }
 
     private void CreateConfig(){
@@ -103,5 +108,11 @@ public class LobbyMain extends JavaPlugin {
         messageyml.set("Message.build.on", "Du kannst bauen");
         messageyml.set("Message.build.seton", "Der Spieler %targetplayer% kann jetzt bauen");
         messageyml.set("Message.build.setoff", "Der Spieler %targetplayer% kann nicht mehr bauen");
+
+        try {
+            messageyml.save(messagefile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

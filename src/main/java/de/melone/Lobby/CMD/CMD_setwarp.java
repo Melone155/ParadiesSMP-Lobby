@@ -1,6 +1,7 @@
 package de.melone.Lobby.CMD;
 
 import de.melone.Lobby.LobbyMain;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -40,6 +41,8 @@ public class CMD_setwarp implements CommandExecutor, TabCompleter {
             LobbyMain.warpyml.set(name + ".Yaw", Yaw);
             LobbyMain.warpyml.set(name + ".Pitch", Pitch);
             LobbyMain.warpyml.set(name + ".World", World);
+
+            player.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + "§7Der Warp wurde gesetzt"));
 
             try {
                 LobbyMain.warpyml.save(LobbyMain.warpfile);

@@ -3,11 +3,14 @@ package de.melone.Lobby.CMD;
 import de.melone.Lobby.LobbyMain;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,6 +32,17 @@ public class CMD_build implements CommandExecutor, TabCompleter {
                 if (build.contains(player.getUniqueId())) {
                     build.remove(player.getUniqueId());
                     player.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + LobbyMain.messageyml.getString("Message.build.off")));
+
+                    player.getInventory().clear();
+
+                    ItemStack spawn = new ItemStack(Material.RECOVERY_COMPASS);
+                    ItemMeta spawnmeta = spawn.getItemMeta();
+                    spawnmeta.setDisplayName(LobbyMain.messageyml.getString("Message.items.Navigator"));
+                    spawn.setItemMeta(spawnmeta);
+
+
+                    player.getPlayer().getInventory().setItem(4, spawn);
+
                 } else {
                     build.add(player.getUniqueId());
                     player.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + LobbyMain.messageyml.getString("Message.build.on")));
@@ -40,6 +54,16 @@ public class CMD_build implements CommandExecutor, TabCompleter {
                     build.remove(targetplayer.getUniqueId());
                     targetplayer.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + LobbyMain.messageyml.getString("Message.build.off")));
                     player.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + ConfigMessages(LobbyMain.messageyml.getString("Message.build.setoff"))));
+
+                    player.getInventory().clear();
+
+                    ItemStack spawn = new ItemStack(Material.RECOVERY_COMPASS);
+                    ItemMeta spawnmeta = spawn.getItemMeta();
+                    spawnmeta.setDisplayName(LobbyMain.messageyml.getString("Message.items.Navigator"));
+                    spawn.setItemMeta(spawnmeta);
+
+
+                    targetplayer.getPlayer().getInventory().setItem(4, spawn);
                 } else {
                     build.add(targetplayer.getUniqueId());
                     targetplayer.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + LobbyMain.messageyml.getString("Message.build.on")));

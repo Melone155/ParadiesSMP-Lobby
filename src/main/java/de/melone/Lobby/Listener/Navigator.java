@@ -33,7 +33,7 @@ public class Navigator implements Listener {
             if (event.hasItem()) {
                 if (event.getItem().getType() == Material.RECOVERY_COMPASS) {
 
-                    Inventory inv = Bukkit.createInventory(null, 54, "");
+                    Inventory inv = Bukkit.createInventory(null, 54, LobbyMain.messageyml.getString("Message.items.Navigator"));
 
                     ItemStack leer = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
                     ItemMeta leermeta = leer.getItemMeta();
@@ -133,93 +133,97 @@ public class Navigator implements Listener {
         Player player = (Player) event.getWhoClicked();
         if (event.getView().getTitle().equals(LobbyMain.messageyml.getString("Message.items.Navigator"))) {
             event.setCancelled(true);
-            if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.spawn"))) {
+            try {
+                if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.spawn"))) {
 
-                if (!(LobbyMain.warpyml.getString("Spawn") == null)) {
+                    if (!(LobbyMain.warpyml.getString("Spawn") == null)) {
 
-                    Double X = LobbyMain.warpyml.getDouble("Spawn.X");
-                    int Y = LobbyMain.warpyml.getInt("Spawn.Y");
-                    Double Z = LobbyMain.warpyml.getDouble("Spawn.Z");
-                    int Pitch = LobbyMain.warpyml.getInt("Spawn.Pitch");
-                    int Yaw = LobbyMain.warpyml.getInt("Spawn.Yaw");
-                    String Wold = LobbyMain.warpyml.getString("Spawn.World");
+                        Double X = LobbyMain.warpyml.getDouble("Spawn.X");
+                        int Y = LobbyMain.warpyml.getInt("Spawn.Y");
+                        Double Z = LobbyMain.warpyml.getDouble("Spawn.Z");
+                        int Pitch = LobbyMain.warpyml.getInt("Spawn.Pitch");
+                        int Yaw = LobbyMain.warpyml.getInt("Spawn.Yaw");
+                        String Wold = LobbyMain.warpyml.getString("Spawn.World");
 
-                    player.teleport(new Location(player.getServer().getWorld(Wold), X, Y, Z, Yaw, Pitch));
-                } else {
-                    player.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + LobbyMain.messageyml.getString("Message.nowarp")));
+                        player.teleport(new Location(player.getServer().getWorld(Wold), X, Y, Z, Yaw, Pitch));
+                    } else {
+                        player.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + LobbyMain.messageyml.getString("Message.nowarp")));
+                    }
+
+                } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.Build"))) {
+
+                    ByteArrayDataOutput out = ByteStreams.newDataOutput();
+                    out.writeUTF("Connect");
+                    out.writeUTF("bauserver");
+                    player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+
+                } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.Creative"))) {
+
+                    ByteArrayDataOutput out = ByteStreams.newDataOutput();
+                    out.writeUTF("Connect");
+                    out.writeUTF("creative");
+                    player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+
+                } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.dev"))) {
+
+                    ByteArrayDataOutput out = ByteStreams.newDataOutput();
+                    out.writeUTF("Connect");
+                    out.writeUTF("dev");
+                    player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+
+                } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.private"))) {
+
+                    player.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + LobbyMain.soon));
+
+                } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.gestrandet"))) {
+
+                    player.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + LobbyMain.soon));
+
+                } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.showcase"))) {
+
+                    player.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + LobbyMain.soon));
+
+                } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.smp"))) {
+
+                    ByteArrayDataOutput out = ByteStreams.newDataOutput();
+                    out.writeUTF("Connect");
+                    out.writeUTF("SMP");
+                    player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+
+                } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.citybuild"))) {
+
+                    ByteArrayDataOutput out = ByteStreams.newDataOutput();
+                    out.writeUTF("Connect");
+                    out.writeUTF("citybuild");
+                    player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+
+                } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.paradies"))) {
+
+                    player.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + LobbyMain.soon));
+
+                } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.caseopening"))) {
+
+                    if (!(LobbyMain.warpyml.getString("caseopening") == null)) {
+
+                        Double X = LobbyMain.warpyml.getDouble("caseopening.X");
+                        int Y = LobbyMain.warpyml.getInt("caseopening.Y");
+                        Double Z = LobbyMain.warpyml.getDouble("caseopening.Z");
+                        int Pitch = LobbyMain.warpyml.getInt("caseopening.Pitch");
+                        int Yaw = LobbyMain.warpyml.getInt("caseopening.Yaw");
+                        String Wold = LobbyMain.warpyml.getString("caseopening.World");
+
+                        player.teleport(new Location(player.getServer().getWorld(Wold), X, Y, Z, Yaw, Pitch));
+
+                    } else {
+                        player.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + LobbyMain.messageyml.getString("Message.nowarp")));
+                    }
+
+                } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.soon"))) {
+
+                    player.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + LobbyMain.soon));
                 }
-
-            } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.Build"))) {
-
-                ByteArrayDataOutput out = ByteStreams.newDataOutput();
-                out.writeUTF("Connect");
-                out.writeUTF("bauserver");
-                player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
-
-            } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.Creative"))) {
-
-                ByteArrayDataOutput out = ByteStreams.newDataOutput();
-                out.writeUTF("Connect");
-                out.writeUTF("creative");
-                player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
-
-            } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.dev"))) {
-
-                ByteArrayDataOutput out = ByteStreams.newDataOutput();
-                out.writeUTF("Connect");
-                out.writeUTF("dev");
-                player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
-
-            } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.private"))) {
-
-                player.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + LobbyMain.soon));
-
-            } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.gestrandet"))) {
-
-                player.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + LobbyMain.soon));
-
-            } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.showcase"))) {
-
-                player.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + LobbyMain.soon));
-
-            } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.smp"))) {
-
-                ByteArrayDataOutput out = ByteStreams.newDataOutput();
-                out.writeUTF("Connect");
-                out.writeUTF("SMP");
-                player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
-
-            } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.citybuild"))) {
-
-                ByteArrayDataOutput out = ByteStreams.newDataOutput();
-                out.writeUTF("Connect");
-                out.writeUTF("citybuild");
-                player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
-
-            } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.paradies"))) {
-
-                player.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + LobbyMain.soon));
-
-            } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.caseopening"))) {
-
-                if (!(LobbyMain.warpyml.getString("caseopening") == null)) {
-
-                    Double X = LobbyMain.warpyml.getDouble("caseopening.X");
-                    int Y = LobbyMain.warpyml.getInt("caseopening.Y");
-                    Double Z = LobbyMain.warpyml.getDouble("caseopening.Z");
-                    int Pitch = LobbyMain.warpyml.getInt("caseopening.Pitch");
-                    int Yaw = LobbyMain.warpyml.getInt("caseopening.Yaw");
-                    String Wold = LobbyMain.warpyml.getString("caseopening.World");
-
-                    player.teleport(new Location(player.getServer().getWorld(Wold), X, Y, Z, Yaw, Pitch));
-
-                } else {
-                    player.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + LobbyMain.messageyml.getString("Message.nowarp")));
-                }
-
-            } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(LobbyMain.messageyml.getString("Message.item.Navigator.soon"))) {
-
-                player.sendMessage(MiniMessage.miniMessage().deserialize(LobbyMain.prefix + " " + LobbyMain.soon));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
         }
     }
