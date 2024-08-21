@@ -1,6 +1,7 @@
 package de.melone.Lobby.Listener;
 
 import de.melone.Lobby.LobbyMain;
+import de.melone.Lobby.ulti.NoSQL;
 import fr.mrmicky.fastboard.FastBoard;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.md_5.bungee.api.ChatColor;
@@ -17,17 +18,15 @@ public class Scorbord {
 
     public void updateBoard(FastBoard board, Player player) {
         board.updateLines(
+                "",
                 LobbyMain.messageyml.getString("Message.Scorbord.Player"),
                 playername(LobbyMain.messageyml.getString("Message.Scorbord.Player2"), player),
                 "",
                 LobbyMain.messageyml.getString("Message.Scorbord.Rang"),
                 " " + MakeColore(PlaceholderAPI.setPlaceholders(player, "%luckperms_prefix%")),
                 "",
-                LobbyMain.messageyml.getString("Message.Scorbord.Online"),
-                onlineplayer(LobbyMain.messageyml.getString("Message.Scorbord.Onlin2")),
-                "",
                 LobbyMain.messageyml.getString("Message.Scorbord.Playtime"),
-                playtime(LobbyMain.messageyml.getString("Message.Scorbord.Playtime2")),
+                playtime(LobbyMain.messageyml.getString("Message.Scorbord.Playtime2"), player),
                 "",
                 LobbyMain.messageyml.getString("Message.Scorbord.tiktok"),
                 LobbyMain.messageyml.getString("Message.Scorbord.tiktok2"),
@@ -75,27 +74,18 @@ public class Scorbord {
         return "";
     }
 
-    private static String playtime(String message) {
+    private static String playtime(String message, Player player) {
         if (message.contains("%playtime%")) {
 
-            return message.replace("%playtime%", "%no%");
+            return message.replace("%playtime%", NoSQL.getPlayTime(player).toString());
         }
         return message;
     }
 
     private static String playername(String message, Player player){
-        if (message.contains("%playtime%")) {
+        if (message.contains("%player%")) {
 
             return message.replace("%player%", player.getName());
-        }
-        return message;
-    }
-
-    private static String onlineplayer(String message){
-        if (message.contains("%onlineplayer%") || message.contains("%maxonlineplayer%")) {
-
-            return message.replace("%onlineplayer%", "" + Bukkit.getServer().getOnlinePlayers())
-                    .replace("%maxonlineplayer%", "" + Bukkit.getServer().getMaxPlayers());
         }
         return message;
     }

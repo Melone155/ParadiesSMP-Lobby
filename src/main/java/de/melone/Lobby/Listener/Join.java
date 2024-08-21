@@ -1,6 +1,7 @@
 package de.melone.Lobby.Listener;
 
 import de.melone.Lobby.LobbyMain;
+import de.melone.Lobby.ulti.NoSQL;
 import fr.mrmicky.fastboard.FastBoard;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -24,17 +25,17 @@ public class Join implements Listener {
     public void onJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
 
-        event.joinMessage(null);
+        if(!player.hasPlayedBefore()) {
+            NoSQL.Create(player);
+        }
 
-        LobbyMain.player = player;
+            event.joinMessage(null);
 
         FastBoard board = new FastBoard(player);
         board.updateTitle("DeinServer");
         boards.put(player.getUniqueId(), board);
 
-        for (Player online : Bukkit.getOnlinePlayers()){
-            new Scorbord().updateBoard(board, online);
-        }
+        new Scorbord().updateBoard(board, player);
 
         player.getInventory().clear();
 
@@ -49,6 +50,9 @@ public class Join implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event){
+        Player player = event.getPlayer();
         event.quitMessage(null);
+
+        NoSQL.Update(player);
     }
 }

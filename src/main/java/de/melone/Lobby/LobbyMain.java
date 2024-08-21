@@ -3,10 +3,8 @@ package de.melone.Lobby;
 import de.melone.Lobby.CMD.CMD_build;
 import de.melone.Lobby.CMD.CMD_setspawn;
 import de.melone.Lobby.CMD.CMD_setwarp;
-import de.melone.Lobby.Listener.Buildevent;
-import de.melone.Lobby.Listener.Join;
-import de.melone.Lobby.Listener.Navigator;
-import de.melone.Lobby.Listener.Scorbord;
+import de.melone.Lobby.Listener.*;
+import de.melone.Lobby.ulti.NoSQL;
 import fr.mrmicky.fastboard.FastBoard;
 import it.unimi.dsi.fastutil.ints.AbstractInt2BooleanMap;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -31,19 +29,32 @@ public class LobbyMain extends JavaPlugin {
     public static File warpfile = new File("plugins//Lobby//warps.yml");
     public static YamlConfiguration warpyml = YamlConfiguration.loadConfiguration(warpfile);
 
+    public static File sqlfile = new File("plugins//Lobby//nosql.yml");
+    public static YamlConfiguration sqlyml = YamlConfiguration.loadConfiguration(sqlfile);
+
     public static String prefix = messageyml.getString("Message.prefix");
     public static String noperms = messageyml.getString("Message.noperms");
     public static String error = messageyml.getString("Message.error");
     public static String soon = messageyml.getString("Message.soon");
 
-    public static Player player;
+    public static String Username;
+    public static String Password;
+    public static String Host;
+    public static String Port;
+    public static String Database;
+    public static String Collection;
 
     @Override
     public void onEnable() {
 
         CreateConfig();
+        LoadSQL();
         registerCommand();
         registerlistener();
+
+        NoSQL.Connection();
+
+        PlayerHide.loreset();
 
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     }
@@ -88,6 +99,15 @@ public class LobbyMain extends JavaPlugin {
                 throw new RuntimeException(e);
             }
         }
+
+        if (!sqlfile.exists()){
+            try {
+                sqlfile.createNewFile();
+                SQLFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     private static void Message(){
@@ -121,13 +141,11 @@ public class LobbyMain extends JavaPlugin {
         messageyml.set("Message.Scorbord.Titel", "DeinServer");
         messageyml.set("Message.Scorbord.Player", "Spieler:");
         messageyml.set("Message.Scorbord.Player2", "%player%");
-        messageyml.set("Message.Scorbord.Online", "Online:");
-        messageyml.set("Message.Scorbord.Onlin2", "%onlineplayer%/%maxonlineplayer%");
         messageyml.set("Message.Scorbord.Rang", "Rang:");
         messageyml.set("Message.Scorbord.Playtime", "Spielzeit");
-        messageyml.set("Message.Scorbord.Playtime2", "%playtime%");
-        messageyml.set("Message.Scorbord.tiktok", "Tiktok2");
-        messageyml.set("Message.Scorbord.toktok2", "ParadiesSMPDE");
+        messageyml.set("Message.Scorbord.Playtime2", "%playtime% Stunden");
+        messageyml.set("Message.Scorbord.tiktok", "Tiktok:");
+        messageyml.set("Message.Scorbord.tiktok2", "ParadiesSMPDE");
         messageyml.set("Message.Scorbord.Webseite", "Webseite");
         messageyml.set("Message.Scorbord.Webseite2", "Coming Soon!");
 
@@ -136,5 +154,29 @@ public class LobbyMain extends JavaPlugin {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static void SQLFile(){
+        sqlyml.set("SQL.host", "127.0.0.1");
+        sqlyml.set("SQL.Port", "27017");
+        sqlyml.set("SQL.User", "root");
+        sqlyml.set("SQL.Passwort", "passwort");
+        sqlyml.set("SQL.Database", "db");
+        sqlyml.set("SQL.Collection", "collection");
+
+        try {
+            sqlyml.save(sqlfile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void LoadSQL(){
+        Host = sqlyml.getString("SQL.host");
+        Port = sqlyml.getString("SQL.Port");
+        Username = sqlyml.getString("SQL.User");
+        Password = sqlyml.getString("SQL.Passwort");
+        Database = sqlyml.getString("SQL.Database");
+        Collection = sqlyml.getString("SQL.Collection");
     }
 }
