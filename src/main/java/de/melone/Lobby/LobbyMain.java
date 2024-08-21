@@ -54,8 +54,6 @@ public class LobbyMain extends JavaPlugin {
 
         NoSQL.Connection();
 
-        PlayerHide.loreset();
-
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     }
 
